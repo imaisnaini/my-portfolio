@@ -153,6 +153,22 @@ const experiences = [
   },
 ]
 
+const education = [
+  {
+    period: "Nov 2025 - Present",
+    degree: "Bachelor's Degree in Informatics Engineering (Transfer Program)",
+    institution: "Universitas Siber Asia",
+    details: "GPA 3.72 / 4.00"
+  },
+  {
+    period: "2017 - 2020",
+    degree: "Diploma Degree in Informatics Engineering",
+    institution: "Politeknik Elektronika Negeri Surabaya",
+    details: "GPA 3.51 / 4.00"
+  }
+]
+
+
 function TechBadge({ icon: Icon, name, color }) {
   return (
     <span className="tech-badge">
@@ -314,9 +330,18 @@ export default function Home() {
 
         <section id="education" className="content-section reveal">
           <SectionHeading number="04">Education</SectionHeading>
-          <p className="section-placeholder">
-            Academic background and ongoing undergraduate studies.
-          </p>
+          <div className="education-list">
+            {education.map((item, idx) => (
+              <div className="education-item" key={idx}>
+                <div className="education-period">{item.period}</div>
+                <div className="education-details">
+                  <h3 className="education-degree">{item.degree}</h3>
+                  <p className="education-institution">{item.institution}</p>
+                  <p className="education-info">{item.details}</p>
+                </div>
+              </div>
+            ))}
+          </div>
         </section>
 
         <section id="github" className="content-section reveal">
