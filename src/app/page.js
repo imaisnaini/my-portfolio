@@ -116,6 +116,43 @@ const technologies = [
   },
 ];
 
+const experiences = [
+  {
+    period: "April 2026 - September 2026",
+    role: "UI / UX Designer",
+    company: "PT Pertamina EP Cepu (under PT Mitra Integrasi Informatika)",
+    location: "Jakarta, Indonesia",
+    bullets: [
+      "Designed UI/UX for internal corporate web and mobile applications, including budgeting, KPI management, and operational systems.",
+      "Created custom UI assets and visual elements, including user flows, loading states, splash screens, logos, iconography and landing pages, while maintaining consistency with company branding.",
+      "Produced graphic assets, promotional materials, broadcast communications, presentation templates, and simple video content for app launches and corporate events."
+    ],
+  },
+  {
+    period: "October 2023 - February 2026",
+    role: "Android Developer",
+    company: "PT Bank Negara Indonesia (under PT Mitra Integrasi Informatika)",
+    location: "Jakarta, Indonesia",
+    bullets: [
+      "Developed and maintained features for wondr by BNI, collaborating with cross-functional Agile team of 20+ Android Developers, Application Designers, Scrum Masters, and QA Engineers.",
+      "Built enterprise Android applications using Kotlin, Jetpack Compose, and REST API integration, following Clean Architecture withiin a multi-module and multi-repository project structure.",
+      "Implemented new features, performed code maintenance, optimized application performance, and provided post go-live support to ensure application stability and high-quality releases.",
+      "Developed internal automation tools using Python and Django for operational reporting and application monitoring, while assisting in production analysys using Kibana and Dynatrace."
+    ],
+  },
+  {
+    period: "March 2021 - September 2023",
+    role: "Android Developer",
+    company: "PT Semai Raya Internasional",
+    location: "Bandung, Indonesia",
+    bullets: [
+      "Designed and developed enterprise Android applications supporting end-to-end palm oil business processes, including plantation management and oil shipping operations, using Java, Kotlin, and Jetpack Compose.",
+      "Designed application UI/UX, translated business requirements into functional features, and conducted product demonstrations for clients to gather feedback and support project delivery.",
+      "Supported the development of Bantex e-Filling for sister company by building cross-platorm mobile features using Flutter.",
+    ],
+  },
+]
+
 function TechBadge({ icon: Icon, name, color }) {
   return (
     <span className="tech-badge">
@@ -200,7 +237,7 @@ export default function Home() {
   </p>
 
   <p className="profile-bio">
-    An IT Enthusiasm
+    Software Engineer with multidisciplinary experience in Android Development, Data Engineering, IT Operations, and UI/UX Design across enterprise banking and energy projects.
   </p>
 
   <a
@@ -231,6 +268,24 @@ export default function Home() {
             A timeline of my professional journey, responsibilities,
             and contributions.
           </p>
+          <div className="timeline">
+            {experiences.map((exp, idx) => (
+              <div className="timeline-item" key={idx}>
+                <div className="timeline-dot"/>
+                <div className="timeline-content">
+                  <span className="timeline-date">{exp.period}</span>
+                  <h3 className="timeline-role">{exp.role}</h3>
+                  <p className="timeline-company">{exp.company}</p>
+                  <p className="timeline-location">{exp.location}</p>
+                  <ul className="timeline-bullets">
+                    {exp.bullets.map((bullet, bIdx) => (
+                      <li key={bIdx}>{bullet}</li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            ))}
+          </div>
         </section>
 
         <section id="projects" className="content-section reveal">
