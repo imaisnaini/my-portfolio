@@ -173,8 +173,8 @@ a:focus-visible {
 }
 
 .profile-avatar {
-  width: 104px;
-  height: 104px;
+  width: 156px;
+  height: 156px;
   flex-shrink: 0;
   overflow: hidden;
   border-radius: 50%;
@@ -192,13 +192,40 @@ a:focus-visible {
   min-width: 0;
 }
 
-.profile-identity h1 {
-  margin: 0 0 0.85rem;
+.profile-name-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.25rem;
+}
+
+.profile-name-row h1 {
+  margin: 0;
   color: var(--foreground);
-  font-size: clamp(1.15rem, 3vw, 1.65rem);
+  font-size: clamp(1.25rem, 3.5vw, 1.75rem);
   font-weight: 700;
-  line-height: 1.3;
+  line-height: 1.25;
   letter-spacing: -0.04em;
+}
+
+.verified-badge {
+  color: #38bdf8; /* Verified Sky Blue */
+  flex-shrink: 0;
+}
+
+.profile-location {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--muted);
+  font-size: 0.875rem;
+  font-weight: 500;
+  margin-bottom: 0.75rem;
+}
+
+.profile-location svg {
+  color: var(--accent); /* Accent green pin color */
+  flex-shrink: 0;
 }
 
 .profile-socials {
@@ -449,6 +476,92 @@ a:focus-visible {
   .education-item {
     grid-template-columns: 1fr;
     gap: 0.35rem;
+  }
+}
+
+/* CONNECT SECTION CTA CARDS (MATCHING REFERENCE IMAGE 2) */
+.contact-cta-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.contact-card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.15rem 1.25rem;
+  border-radius: 14px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  text-decoration: none;
+  transition:
+    transform 200ms ease,
+    border-color 200ms ease,
+    background 200ms ease;
+}
+
+.contact-card:hover {
+  border-color: var(--accent);
+  background: var(--surface-hover);
+  transform: translateY(-2px);
+}
+
+.contact-card-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  background: var(--badge-bg);
+  border: 1px solid var(--border-dashed);
+  color: var(--accent);
+  flex-shrink: 0;
+}
+
+.contact-card-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  flex-grow: 1;
+  min-width: 0;
+}
+
+.contact-card-label {
+  font-size: 0.725rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--accent);
+  text-transform: uppercase;
+}
+
+.contact-card-value {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--foreground);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.contact-card-arrow {
+  color: var(--muted);
+  flex-shrink: 0;
+  transition:
+    transform 180ms ease,
+    color 180ms ease;
+}
+
+.contact-card:hover .contact-card-arrow {
+  color: var(--accent);
+  transform: translateX(3px);
+}
+
+@media (max-width: 640px) {
+  .contact-cta-grid {
+    grid-template-columns: 1fr;
   }
 }
 

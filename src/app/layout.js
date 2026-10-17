@@ -13,9 +13,12 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "Fatimah Isnaini Shabrina | Portfolio",
+  title: "Fatimah Isnaini Shabrina | Software Developer",
   description:
     "Personal portfolio showcasing mobile development, system analysis, data engineering, and UI/UX design.",
+  icons: {
+    icon: "/profile.png",
+  },
 };
 
 export default function RootLayout({ children }) {

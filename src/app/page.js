@@ -2,11 +2,10 @@ import {
   FiMail,
   FiFileText,
   FiArrowUpRight,
-  FiSmartphone,
-  FiDatabase,
   FiLink2,
   FiLayers,
-  FiActivity,
+  FiChevronRight,
+  FiMapPin,
 } from "react-icons/fi";
 
 import {
@@ -16,6 +15,7 @@ import {
   FaDatabase,
   FaPaintBrush,
   FaPalette,
+  FaWhatsapp,
 } from "react-icons/fa";
 
 import {
@@ -38,6 +38,8 @@ import {
   SiMongodb,
 } from "react-icons/si";
 
+import { MdVerified } from "react-icons/md";
+
 const sections = [
   { id: "profile", label: "Profile" },
   { id: "experience", label: "Experience" },
@@ -46,29 +48,6 @@ const sections = [
   { id: "education", label: "Education" },
   { id: "github", label: "GitHub" },
   { id: "contact", label: "Contact" },
-];
-
-const expertise = [
-  {
-    icon: FiSmartphone,
-    title: "Mobile Development",
-    description: "Android, Kotlin, Java",
-  },
-  {
-    icon: FiActivity,
-    title: "System Analysis",
-    description: "Production support, RCA, monitoring",
-  },
-  {
-    icon: FaDatabase,
-    title: "Data Engineering",
-    description: "SQL, Python, reporting",
-  },
-  {
-    icon: FaPaintBrush,
-    title: "UI/UX Design",
-    description: "Figma, interfaces, prototyping",
-  },
 ];
 
 const technologies = [
@@ -193,7 +172,7 @@ export default function Home() {
       <header className="navbar">
         <a className="brand" href="#profile">
           <span className="brand-mark">F.</span>
-          <span>Personal Portfolio</span>
+          <span>imaisnaini</span>
         </a>
 
         <nav className="nav-links" aria-label="Main navigation">
@@ -211,14 +190,20 @@ export default function Home() {
   <div className="profile-header">
     <div className="profile-avatar">
       <img
-        src="/profile.jpg"
+        src="/profile.png"
         alt="Fatimah Isnaini Shabrina"
       />
     </div>
 
     <div className="profile-identity">
-      <h1>Fatimah Isnaini Shabrina</h1>
-
+      <div className="profile-name-row">
+        <h1>Fatimah Isnaini Shabrina</h1>
+        <MdVerified className="verified-badge" size={22} title="Verified Profile" />
+      </div>
+      <div className="profile-location">
+        <FiMapPin size={15} />
+        <span>Jakarta, Indonesia</span>
+      </div>
       <div className="profile-socials">
         <a
           href="https://github.com/imaisnaini"
@@ -239,7 +224,7 @@ export default function Home() {
         </a>
 
         <a
-          href="mailto:YOUR_EMAIL@example.com"
+          href="mailto:imaisnaini@gmail.com"
           aria-label="Email"
         >
           <FiMail size={20} />
@@ -267,16 +252,6 @@ export default function Home() {
     <FiArrowUpRight size={16} />
   </a>
 </section>
-
-        <section className="expertise-grid reveal" aria-label="Expertise">
-          {expertise.map(({ icon: Icon, title, description }) => (
-            <article className="expertise-card" key={title}>
-              <Icon size={21} strokeWidth={1.6} />
-              <h3>{title}</h3>
-              <p>{description}</p>
-            </article>
-          ))}
-        </section>
 
         <section id="experience" className="content-section reveal">
           <SectionHeading number="01">Work Experience</SectionHeading>
@@ -353,14 +328,43 @@ export default function Home() {
 
         <section id="contact" className="contact-section reveal">
           <SectionHeading number="06">Let&apos;s Connect</SectionHeading>
-          <h3>Have something interesting in mind?</h3>
+          
           <p>
             I&apos;m open to discussing opportunities, projects,
             and ideas at the intersection of technology and design.
           </p>
-          <a className="button button-primary" href="mailto:YOUR_EMAIL@example.com">
-            Get in touch <FiArrowUpRight size={16} />
-          </a>
+          <div className="contact-cta-grid">
+            <a 
+              href="mailto:imaisnaini@gmail.com"
+              className="contact-card"
+              aria-label="Send Email"
+            >
+              <div className="contact-card-icon">
+                <FiMail size={20}/>
+              </div>
+              <div className="contact-card-info">
+                <span className="contact-card-label">EMAIL</span>
+                <span className="contact-card-value">imaisnaini@gmail.com</span>
+              </div>
+              <FiChevronRight size={18} className="contact-card-arrow"/>
+            </a>
+            <a
+              href="https://wa.me/6282245443941"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="contact-card"
+              aria-label="Send WhatsApp Message"
+            >
+              <div className="contact-card-icon">
+                <FaWhatsapp size={20}/>
+              </div>
+              <div className="contact-card-info">
+                <span className="contact-card-label">WHATSAPP</span>
+                <span className="contact-card-value">Chat on WhatsApp</span>
+              </div>
+              <FiChevronRight size={18} className="contact-card-arrow"/>
+            </a>
+          </div>
         </section>
 
         <footer className="footer">
