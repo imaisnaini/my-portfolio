@@ -46,6 +46,7 @@ const sections = [
   { id: "projects", label: "Projects" },
   { id: "technologies", label: "Technologies" },
   { id: "education", label: "Education" },
+  { id: "certification", label: "Certification"},
   { id: "github", label: "GitHub" },
   { id: "contact", label: "Contact" },
 ];
@@ -144,6 +145,24 @@ const education = [
     degree: "Diploma Degree in Informatics Engineering",
     institution: "Politeknik Elektronika Negeri Surabaya",
     details: "GPA 3.51 / 4.00"
+  }
+]
+
+const certifications = [
+  {
+    date: "July 2025",
+    title: "Gemini Certified University Student",
+    issuer: "Google for Education",
+    image: "/certification_gemini.png",
+    credentialUrl: "https://edu.google.accredible.com/8801dcab-05c7-46f4-9cae-5aeab74fd85f#acc.3Xn1h4PM"
+  }
+]
+
+const trainings = [
+  {
+    date: "Aug 2026",
+    title: "GEMINI",
+    issuer: "Google"
   }
 ]
 
@@ -316,6 +335,38 @@ export default function Home() {
                 </div>
               </div>
             ))}
+          </div>
+        </section>
+
+        <section id="certification" className="content-section reveal">
+          <SectionHeading number="05">Certifications</SectionHeading>
+          <div className="cert-group">
+            <div className="cert-credentials-list">
+              {certifications.map((cert, idx) => (
+                <div className="cert-item" key={idx}>
+                  <div className="cert-date">{cert.date}</div>
+                  <div className="cert-main">
+                    <div className="cert-thumbnail">
+                      <img src={cert.image} alt={cert.title}/>
+                    </div>
+                    <div className="cert-info">
+                      <h4 className="cert-title">{cert.title}</h4>
+                      <p className="cert-issuer">{cert.issuer}</p>
+                      {cert.credentialUrl && cert.credentialUrl !== "#" && (
+                        <a
+                          href={cert.credentialUrl}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="cert-link"
+                        >
+                          VIEW CREDENTIAL <FiArrowUpRight size={14}/>
+                        </a>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </section>
 
