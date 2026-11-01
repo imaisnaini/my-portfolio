@@ -577,6 +577,35 @@ a:focus-visible {
   border: 1px solid var(--border);
   background: var(--surface);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  cursor: pointer !important;
+  position: relative !important;
+  transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease !important;
+}
+
+.cert-thumbnail:hover {
+  transform: scale(1.04) !important;
+  border-color: var(--accent) !important;
+  box-shadow: 0 4px 14px var(--accent-glow) !important;
+}
+
+.cert-thumbnail-hover-hint {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  color: var(--accent);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 180ms ease;
+  pointer-events: none;
+}
+
+.cert-thumbnail:hover .cert-thumbnail-hover-hint {
+  opacity: 1;
 }
 
 .cert-thumbnail img {
@@ -650,7 +679,115 @@ a:focus-visible {
   flex-direction: column;
   gap: 0.2rem;
 }
+/* BLURRED BACKDROP MODAL (MATCHING RENLENON.VERCEL.APP) */
+.cert-modal-overlay {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  z-index: 99999 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background: rgba(0, 0, 0, 0.8) !important;
+  -webkit-backdrop-filter: blur(14px) !important;
+  backdrop-filter: blur(14px) !important;
+  padding: 1.5rem !important;
+  overflow: hidden !important;
+  touch-action: none !important;
+}
 
+.cert-modal-container {
+  position: relative !important;
+  max-width: 820px !important;
+  width: 90% !important;
+  max-height: 90vh !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  background: var(--surface) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: 16px !important;
+  padding: 1.25rem !important;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8) !important;
+  animation: certModalPop 200ms ease both;
+  margin: auto !important;
+}
+
+/* FLOATING CLOSE BUTTON ABOVE TOP-RIGHT OF IMAGE */
+.cert-modal-close {
+  position: absolute !important;
+  top: 14px !important;
+  right: 14px !important;
+  background: var(--badge-bg) !important;
+  border: 1px solid var(--border) !important;
+  color: var(--foreground) !important;
+  border-radius: 50% !important;
+  width: 36px !important;
+  height: 36px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: pointer !important;
+  transition: background 180ms ease, color 180ms ease, transform 180ms ease !important;
+  z-index: 10 !important;
+}
+
+.cert-modal-close:hover {
+  background: var(--accent) !important;
+  color: var(--background) !important;
+  transform: rotate(90deg) !important;
+}
+.cert-modal-img {
+  width: 100% !important;
+  max-height: 72vh !important;
+  object-fit: contain !important;
+  border-radius: 8px !important;
+  border: 1px solid var(--border) !important;
+  display: block !important;
+}
+
+.cert-modal-caption {
+  margin: 0.85rem 0 0 !important;
+  font-size: 0.95rem !important;
+  font-weight: 600 !important;
+  color: var(--foreground) !important;
+  text-align: center !important;
+}
+
+@keyframes certModalFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.cert-modal-caption {
+  margin: 0.85rem 0 0;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--foreground);
+  text-align: center;
+}
+
+@keyframes certModalFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.cert-thumbnail:hover .cert-thumbnail-hover-hint {
+  opacity: 1;
+}
 /* CONTACT SECTION */
 .contact-description {
   max-width: 600px;

@@ -9,6 +9,7 @@ import {
   FiLayers,
   FiChevronRight,
   FiMapPin,
+  FiX,
 } from "react-icons/fi";
 
 import {
@@ -249,11 +250,6 @@ export function GitHubActivity() {
   };
 
   return (
-    <section id="github" className="content-section reveal">
-      <div className="section-heading">
-        <span className="section-number">05</span>
-        <h2>GitHub Activity</h2>
-      </div>
 
       <div className="github-card">
         {loading ? (
@@ -295,10 +291,12 @@ export function GitHubActivity() {
           </>
         )}
       </div>
-    </section>
   );
 }
+
 export default function Home() {
+  const [activeCertModal, setActiveCertModal] = useState(null);
+
   return (
     <main className="site-shell">
       <header className="navbar">
@@ -451,39 +449,72 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="certification" className="content-section reveal">
-          <SectionHeading number="05">Certifications</SectionHeading>
-          <div className="cert-group">
-            <div className="cert-credentials-list">
-              {certifications.map((cert, idx) => (
-                <div className="cert-item" key={idx}>
-                  <div className="cert-date">{cert.date}</div>
-                  <div className="cert-main">
-                    <div className="cert-thumbnail">
-                      <img src={cert.image} alt={cert.title}/>
-                    </div>
-                    <div className="cert-info">
-                      <h4 className="cert-title">{cert.title}</h4>
-                      <p className="cert-issuer">{cert.issuer}</p>
-                      {cert.credentialUrl && cert.credentialUrl !== "#" && (
-                        <a
-                          href={cert.credentialUrl}
-                          target="_blank"
-                          rel="noreferrer"
-                          className="cert-link"
-                        >
-                          VIEW CREDENTIAL <FiArrowUpRight size={14}/>
-                        </a>
-                      )}
-                    </div>
+        {/* CERTIFICATION SECTION (Thumbnail triggers modal state) */}
+      <section id="certification" className="content-section reveal">
+        <SectionHeading number="05">Certifications</SectionHeading>
+        <div className="cert-group">
+          <div className="cert-credentials-list">
+            {certifications.map((cert, idx) => (
+              <div className="cert-item" key={idx}>
+                <div className="cert-date">{cert.date}</div>
+                <div className="cert-main">
+                  <div
+  className="cert-thumbnail"
+  onClick={() => setActiveCertModal({ image: cert.image, title: cert.title })}
+  role="button"
+  tabIndex={0}
+  title="Click to expand preview"
+>
+  <img src={cert.image} alt={cert.title} />
+  <div className="cert-thumbnail-hover-hint">Zoom</div>
+</div>
+                  <div className="cert-info">
+                    <h4 className="cert-title">{cert.title}</h4>
+                    <p className="cert-issuer">{cert.issuer}</p>
+                    {cert.credentialUrl && cert.credentialUrl !== "#" && (
+                      <a
+                        href={cert.credentialUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="cert-link"
+                      >
+                        VIEW CREDENTIAL <FiArrowUpRight size={14} />
+                      </a>
+                    )}
                   </div>
                 </div>
-              ))}
-            </div>
+              </div>
+            ))}
           </div>
-        </section>
-
+        </div>
+      </section>
+{activeCertModal && (
+  <div className="cert-modal-overlay" onClick={() => setActiveCertModal(null)}>
+    <div className="cert-modal-container" onClick={(e) => e.stopPropagation()}>
+      <button
+        className="cert-modal-close"
+        onClick={() => setActiveCertModal(null)}
+        aria-label="Close Preview"
+      >
+        <FiX size={20} />
+      </button>
+      <img
+        src={activeCertModal.image}
+        alt={activeCertModal.title}
+        className="cert-modal-img"
+      />
+      <p className="cert-modal-caption">{activeCertModal.title}</p>
+    </div>
+  </div>
+)}
+      
+    <section id="github" className="content-section reveal">
+      <div className="section-heading">
+        <span className="section-number">05</span>
+        <h2>GitHub Activity</h2>
+      </div>
           <GitHubActivity />
+    </section>
 
         <section id="contact" className="contact-section reveal">
           <SectionHeading number="06">Let's Connect</SectionHeading>
