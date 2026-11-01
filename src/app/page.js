@@ -257,7 +257,7 @@ export default function Home() {
   </p>
 
   <p className="profile-bio">
-    Software Engineer with multidisciplinary experience in Android Development, Data Engineering, IT Operations, and UI/UX Design across enterprise banking and energy projects.
+    I'm a software engineer who enjoys working across different areas of technology, from building Android applications and working with data to improving systems and designing user experiences. I've had the opportunity to contribute to projects in banking and energy, and I'm always open to learning something new.
   </p>
 
   <a
@@ -378,42 +378,34 @@ export default function Home() {
         </section>
 
         <section id="contact" className="contact-section reveal">
-          <SectionHeading number="06">Let&apos;s Connect</SectionHeading>
-          
-          <p>
-            I&apos;m open to discussing opportunities, projects,
-            and ideas at the intersection of technology and design.
+          <SectionHeading number="06">Let's Connect</SectionHeading>
+          <p className="contact-description">
+            Always happy to connect, exchange ideas, or chat about interesting projects and opportunities. Feel free to reach out!
           </p>
-          <div className="contact-cta-grid">
-            <a 
+
+          <div className="contact-actions">
+            {/* Email Button - Accent Pill */}
+            <a
               href="mailto:imaisnaini@gmail.com"
-              className="contact-card"
+              className="contact-pill contact-pill-primary"
               aria-label="Send Email"
             >
-              <div className="contact-card-icon">
-                <FiMail size={20}/>
-              </div>
-              <div className="contact-card-info">
-                <span className="contact-card-label">EMAIL</span>
-                <span className="contact-card-value">imaisnaini@gmail.com</span>
-              </div>
-              <FiChevronRight size={18} className="contact-card-arrow"/>
+              <FiMail size={16} />
+              <span>imaisnaini@gmail.com</span>
+              <FiArrowUpRight size={15} className="pill-arrow" />
             </a>
+
+            {/* WhatsApp Button - Outline Pill */}
             <a
               href="https://wa.me/6282245443941"
               target="_blank"
               rel="noopener noreferrer"
-              className="contact-card"
-              aria-label="Send WhatsApp Message"
+              className="contact-pill"
+              aria-label="Chat on WhatsApp"
             >
-              <div className="contact-card-icon">
-                <FaWhatsapp size={20}/>
-              </div>
-              <div className="contact-card-info">
-                <span className="contact-card-label">WHATSAPP</span>
-                <span className="contact-card-value">Chat on WhatsApp</span>
-              </div>
-              <FiChevronRight size={18} className="contact-card-arrow"/>
+              <FaWhatsapp size={16} />
+              <span>Chat on WhatsApp</span>
+              <FiArrowUpRight size={15} className="pill-arrow" />
             </a>
           </div>
         </section>
