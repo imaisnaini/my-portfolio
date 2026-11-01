@@ -1,3 +1,6 @@
+"use client";
+import { useEffect, useState } from "react";
+
 import {
   FiMail,
   FiFileText,
@@ -150,22 +153,23 @@ const education = [
 
 const certifications = [
   {
-    date: "July 2025",
+    date: "Nov 2026",
+    title: "EF SET Englist Test",
+    issuer: "English First",
+    image: "/ef_set_certificate.png",
+    credentialUrl: "https://cert.efset.org/en/AArsg8"
+  },
+  {
+    date: "July 2026",
     title: "Gemini Certified University Student",
     issuer: "Google for Education",
     image: "/certification_gemini.png",
     credentialUrl: "https://edu.google.accredible.com/8801dcab-05c7-46f4-9cae-5aeab74fd85f#acc.3Xn1h4PM"
-  }
+  },
 ]
 
-const trainings = [
-  {
-    date: "Aug 2026",
-    title: "GEMINI",
-    issuer: "Google"
-  }
-]
-
+const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+const GITHUB_USERNAME = "imaisnaini";
 
 function TechBadge({ icon: Icon, name, color }) {
   return (
@@ -185,6 +189,115 @@ function SectionHeading({ number, children }) {
   );
 }
 
+export function GitHubActivity() {
+  const [weeks, setWeeks] = useState([]);
+  const [totalContributions, setTotalContributions] = useState(0);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchGitHubData() {
+      try {
+        const response = await fetch(
+          `https://github-contributions-api.jogruber.de/v4/${GITHUB_USERNAME}?y=last`
+        );
+        const data = await response.json();
+
+        if (data && data.contributions && Array.isArray(data.contributions)) {
+          const days = data.contributions;
+          const grouped = [];
+
+          for (let i = 0; i < days.length; i += 7) {
+            grouped.push(days.slice(i, i + 7));
+          }
+
+          setWeeks(grouped);
+          const total = days.reduce((sum, day) => sum + (day.count || 0), 0);
+          setTotalContributions(total);
+        }
+      } catch (err) {
+        console.error("Failed to load GitHub activity:", err);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchGitHubData();
+  }, []);
+
+  // Safe Month Label Resolution
+  const getMonthLabel = (week, idx) => {
+    if (!week || !week[0] || !week[0].date) return "";
+
+    try {
+      const [year, month, day] = week[0].date.split("-").map(Number);
+      const date = new Date(year, month - 1, day);
+      const monthName = date.toLocaleString("en-US", { month: "short" });
+
+      if (idx === 0) return monthName;
+
+      const prevWeek = weeks[idx - 1];
+      if (!prevWeek || !prevWeek[0] || !prevWeek[0].date) return monthName;
+
+      const [pYear, pMonth, pDay] = prevWeek[0].date.split("-").map(Number);
+      const prevDate = new Date(pYear, pMonth - 1, pDay);
+      const prevMonthName = prevDate.toLocaleString("en-US", { month: "short" });
+
+      return monthName !== prevMonthName ? monthName : "";
+    } catch (e) {
+      return "";
+    }
+  };
+
+  return (
+    <section id="github" className="content-section reveal">
+      <div className="section-heading">
+        <span className="section-number">05</span>
+        <h2>GitHub Activity</h2>
+      </div>
+
+      <div className="github-card">
+        {loading ? (
+          <div className="github-loading">Loading live GitHub activity...</div>
+        ) : (
+          <>
+            <div className="github-scroll-wrapper">
+              {/* Dynamic Month Header Row aligned 1:1 with week columns */}
+              <div className="github-months-row">
+                {weeks.map((week, idx) => {
+                  const label = getMonthLabel(week, idx);
+                  return (
+                    <div key={idx} className="github-month-col">
+                      {label && <span className="github-month-text">{label}</span>}
+                    </div>
+                  );
+                })}
+              </div>
+
+              {/* 52-Week Dot Heatmap Grid */}
+              <div className="github-grid">
+                {weeks.map((week, weekIdx) => (
+                  <div key={weekIdx} className="github-week-col">
+                    {week.map((day, dayIdx) => (
+                      <span
+                        key={dayIdx}
+                        className={`github-dot level-${day.level ?? 0}`}
+                        title={`${day.count || 0} contributions on ${day.date}`}
+                      />
+                    ))}
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <p className="github-count-label">
+              {totalContributions.toLocaleString()} contributions in the last year
+            </p>
+          </>
+        )}
+      </div>
+    </section>
+  );
+}
 export default function Home() {
   return (
     <main className="site-shell">
@@ -370,12 +483,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="github" className="content-section reveal">
-          <SectionHeading number="05">GitHub Activities</SectionHeading>
-          <p className="section-placeholder">
-            My open-source contributions and selected repositories.
-          </p>
-        </section>
+          <GitHubActivity />
 
         <section id="contact" className="contact-section reveal">
           <SectionHeading number="06">Let's Connect</SectionHeading>
